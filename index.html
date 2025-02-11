@@ -20,6 +20,7 @@
             padding: 20px;
             border-radius: 15px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            position: relative;
         }
         img {
             width: 100%;
@@ -41,12 +42,16 @@
         .no {
             background-color: #757575;
             color: white;
-        }
-        .no:hover {
             position: absolute;
-            top: calc(50% + 100px);
-            left: calc(50% + 50px);
-            transform: translate(-50%, -50%);
+            left: 50%;
+            transform: translateX(-50%);
+            transition: all 0.3s ease;
+        }
+        @media (max-width: 500px) {
+            .no {
+                position: static;
+                transform: none;
+            }
         }
     </style>
 </head>
@@ -56,14 +61,15 @@
         <img src="https://source.unsplash.com/500x300/?love,romantic" alt="Valentine's image">
         <p>I’d love to spend Valentine’s Day with you! What do you say?</p>
         <button class="btn yes" onclick="alert('Yay! Can’t wait! ❤️')">Yes, I'd love to!</button>
-        <button class="btn no" onmouseover="moveButton()">No, sorry 😅</button>
+        <button class="btn no" id="noBtn" onmouseover="moveButton()">No, sorry 😅</button>
     </div>
 
     <script>
         function moveButton() {
-            const button = document.querySelector('.no');
+            const button = document.getElementById('noBtn');
             const x = Math.random() * (window.innerWidth - 100);
             const y = Math.random() * (window.innerHeight - 50);
+            button.style.position = 'absolute';
             button.style.left = x + 'px';
             button.style.top = y + 'px';
         }
